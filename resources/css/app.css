@@ -1,0 +1,917 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+.venato-app {
+    background: #f8f5f0;
+    color: #151412;
+    min-height: 100vh;
+}
+
+.venato-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.venato-page {
+    padding: 28px 0 64px;
+}
+
+.venato-reveal {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+    filter: blur(6px);
+    transition:
+        opacity 720ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        transform 720ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        filter 720ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition-delay: var(--delay, 0ms);
+    will-change: opacity, transform, filter;
+}
+
+.venato-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
+
+.venato-skeleton {
+    position: relative;
+    overflow: hidden;
+}
+
+.venato-skel {
+    background: rgba(21, 20, 18, 0.09);
+    border-radius: 999px;
+}
+
+.venato-skel--title {
+    height: 14px;
+    width: 140px;
+}
+
+.venato-skel--meta {
+    margin-top: 8px;
+    height: 10px;
+    width: 90px;
+    border-radius: 10px;
+    opacity: 0.75;
+}
+
+.venato-skel--price {
+    height: 12px;
+    width: 54px;
+    border-radius: 10px;
+    opacity: 0.85;
+}
+
+.venato-skel--line {
+    margin-top: 10px;
+    height: 10px;
+    width: 100%;
+    border-radius: 10px;
+    opacity: 0.6;
+}
+
+.venato-skel--line.is-short {
+    width: 72%;
+}
+
+.venato-logo {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #0f5c55;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    line-height: 1.1;
+}
+
+.venato-logo--sm {
+    align-items: flex-start;
+}
+
+.venato-logo__sub {
+    font-family: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: #6b6b63;
+}
+
+.venato-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(248, 245, 240, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(21, 20, 18, 0.08);
+}
+
+.venato-header__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+}
+
+.venato-nav {
+    display: none;
+    gap: 18px;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+}
+
+.venato-nav__link {
+    text-decoration: none;
+    color: #151412;
+    opacity: 0.7;
+}
+
+.venato-nav__link.active {
+    opacity: 1;
+    border-bottom: 1px solid rgba(21, 20, 18, 0.35);
+    padding-bottom: 2px;
+}
+
+.venato-header__right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+.venato-iconbtn {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: 1px solid rgba(21, 20, 18, 0.15);
+    background: #f8f5f0;
+    color: rgba(21, 20, 18, 0.75);
+    font-weight: 700;
+}
+
+.venato-hamburger {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1px solid rgba(21, 20, 18, 0.12);
+    background: #f8f5f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 12px;
+}
+
+.venato-hamburger span {
+    height: 2px;
+    width: 100%;
+    background: rgba(21, 20, 18, 0.7);
+    border-radius: 999px;
+}
+
+.venato-lang {
+    display: flex;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(21, 20, 18, 0.12);
+    border-radius: 999px;
+    padding: 3px;
+}
+
+.venato-lang__btn {
+    border: 0;
+    background: transparent;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    color: rgba(21, 20, 18, 0.65);
+    font-weight: 600;
+}
+
+.venato-lang__btn.is-active {
+    background: #ffffff;
+    color: #151412;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.venato-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+}
+
+.venato-drawer__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    border: 0;
+}
+
+.venato-drawer__panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(360px, 92vw);
+    background: #f8f5f0;
+    border-right: 1px solid rgba(21, 20, 18, 0.12);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.venato-drawer__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.venato-drawer__links {
+    display: flex;
+    flex-direction: column;
+}
+
+.venato-drawer__link {
+    padding: 12px 10px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: rgba(21, 20, 18, 0.85);
+    border: 1px solid transparent;
+}
+
+.venato-drawer__link.active {
+    border-color: rgba(21, 20, 18, 0.15);
+    background: rgba(255, 255, 255, 0.55);
+}
+
+.venato-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    text-align: center;
+    margin-top: 4px;
+    margin-bottom: 18px;
+}
+
+.venato-status__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #8b6b00;
+}
+
+.venato-status__open {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    font-weight: 700;
+    color: #8b6b00;
+}
+
+.venato-status__loc {
+    font-size: 13px;
+    color: rgba(21, 20, 18, 0.7);
+}
+
+.venato-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(21, 20, 18, 0.12);
+    border-radius: 999px;
+    padding: 14px 16px;
+    max-width: 720px;
+    margin: 0 auto 16px;
+}
+
+.venato-search__icon {
+    opacity: 0.55;
+}
+
+.venato-search__input {
+    border: 0;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    font-size: 14px;
+}
+
+.venato-chips {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+
+.venato-chip {
+    border: 1px solid rgba(21, 20, 18, 0.12);
+    background: rgba(255, 255, 255, 0.55);
+    padding: 9px 14px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 12px;
+    color: rgba(21, 20, 18, 0.75);
+}
+
+.venato-chip.is-active {
+    background: #0f5c55;
+    color: #ffffff;
+    border-color: rgba(15, 92, 85, 0.35);
+}
+
+.venato-cats {
+    display: flex;
+    gap: 18px;
+    overflow: auto;
+    padding: 8px 2px;
+    border-bottom: 1px solid rgba(21, 20, 18, 0.08);
+    margin-bottom: 26px;
+}
+
+.venato-cat {
+    border: 0;
+    background: transparent;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: rgba(21, 20, 18, 0.55);
+    padding: 10px 0;
+    white-space: nowrap;
+    border-bottom: 1px solid transparent;
+    font-weight: 700;
+}
+
+.venato-cat.is-active {
+    color: rgba(21, 20, 18, 0.9);
+    border-bottom-color: rgba(21, 20, 18, 0.35);
+}
+
+.venato-section {
+    margin-top: 26px;
+}
+
+.venato-section__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+}
+
+.venato-h1 {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-size: 34px;
+    letter-spacing: 0.02em;
+}
+
+.venato-h2 {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-size: 28px;
+    letter-spacing: 0.01em;
+    margin-bottom: 16px;
+}
+
+.venato-muted {
+    color: rgba(21, 20, 18, 0.55);
+    font-size: 12px;
+}
+
+.venato-featuredgrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+}
+
+.venato-featured {
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(21, 20, 18, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.06);
+}
+
+.venato-featured__imgwrap {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: #e9e2d6;
+}
+
+.venato-featured__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.venato-badge {
+    position: absolute;
+    left: 14px;
+    top: 12px;
+    background: rgba(15, 92, 85, 0.9);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    padding: 7px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.venato-badge.is-gold {
+    background: rgba(139, 107, 0, 0.9);
+}
+
+.venato-featured__body {
+    padding: 14px 16px 16px;
+}
+
+.venato-featured__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 14px;
+}
+
+.venato-cardtitle {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.venato-carddesc {
+    margin-top: 8px;
+    color: rgba(21, 20, 18, 0.6);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.venato-price {
+    color: #0f5c55;
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+.venato-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.venato-item {
+    display: grid;
+    grid-template-columns: 86px 1fr;
+    gap: 14px;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(21, 20, 18, 0.1);
+    border-radius: 18px;
+    padding: 12px;
+}
+
+.venato-item__imgwrap {
+    width: 86px;
+    height: 86px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: #e9e2d6;
+    border: 1px solid rgba(21, 20, 18, 0.08);
+}
+
+.venato-item__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.venato-item__head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.venato-item__name {
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.venato-item__meta {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    font-weight: 800;
+    color: rgba(21, 20, 18, 0.55);
+    margin-top: 2px;
+}
+
+.venato-item__desc {
+    margin-top: 8px;
+    color: rgba(21, 20, 18, 0.6);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.venato-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 18px;
+}
+
+.venato-more__btn {
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(139, 107, 0, 0.35);
+    background: rgba(255, 255, 255, 0.65);
+    color: #8b6b00;
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+}
+
+.venato-more__btn:disabled {
+    opacity: 0.5;
+}
+
+.venato-loading {
+    color: rgba(21, 20, 18, 0.6);
+    font-size: 13px;
+    margin: 10px 0 12px;
+}
+
+.venato-footer {
+    background: rgba(21, 20, 18, 0.06);
+    border-top: 1px solid rgba(21, 20, 18, 0.08);
+    padding: 24px 0;
+}
+
+.venato-footer__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.venato-footer__logo {
+    font-family: 'Playfair Display', ui-serif, Georgia, serif;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #0f5c55;
+    font-size: 20px;
+}
+
+.venato-footer__copy {
+    margin-top: 8px;
+    color: rgba(21, 20, 18, 0.55);
+    font-size: 12px;
+    max-width: 520px;
+}
+
+.venato-footer__links {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.venato-footer__link {
+    text-decoration: none;
+    color: rgba(21, 20, 18, 0.7);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    font-weight: 800;
+}
+
+.venato-footer__mobile {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    gap: 14px;
+    justify-items: center;
+    text-align: center;
+}
+
+.venato-itineraire {
+    width: min(420px, 92vw);
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: rgba(139, 107, 0, 0.9);
+    color: #ffffff;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    border: 1px solid rgba(139, 107, 0, 0.25);
+}
+
+.venato-social {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.venato-social__link {
+    text-decoration: none;
+    color: rgba(21, 20, 18, 0.65);
+    font-size: 12px;
+}
+
+.venato-footer__mobilecopy {
+    color: rgba(21, 20, 18, 0.55);
+    font-size: 11px;
+}
+
+@media (min-width: 768px) {
+    .venato-nav {
+        display: flex;
+    }
+
+    .venato-hamburger {
+        display: none;
+    }
+
+    .venato-footer__inner {
+        display: flex;
+    }
+
+    .venato-footer__mobile {
+        display: none;
+    }
+
+    .venato-featuredgrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .venato-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .venato-item {
+        grid-template-columns: 1fr;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .venato-item__imgwrap {
+        width: 100%;
+        height: 170px;
+        border-radius: 18px 18px 0 0;
+        border: 0;
+    }
+
+    .venato-item__body {
+        padding: 14px 16px 16px;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .venato-app {
+        background: linear-gradient(135deg, #f8f5f0 0%, #f4efe6 45%, #f8f5f0 100%);
+        background-size: 160% 160%;
+        animation: venato-bg 18s ease-in-out infinite;
+    }
+
+    .venato-status__dot {
+        animation: venato-pulse 1400ms ease-in-out infinite;
+    }
+
+    .venato-badge {
+        animation: venato-float 3600ms ease-in-out infinite;
+    }
+
+    .venato-drawer__panel {
+        animation: venato-slide-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    .venato-drawer__backdrop {
+        animation: venato-fade-in 220ms ease both;
+    }
+
+    .venato-skeleton::before {
+        content: '';
+        position: absolute;
+        inset: -1px;
+        background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%);
+        transform: translateX(-65%);
+        animation: venato-shimmer 1250ms ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    .venato-search {
+        transition:
+            transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+            box-shadow 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+            border-color 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .venato-search:focus-within {
+        transform: translateY(-1px);
+        border-color: rgba(15, 92, 85, 0.25);
+        box-shadow: 0 18px 50px rgba(15, 92, 85, 0.08);
+    }
+
+    .venato-chip,
+    .venato-more__btn {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .venato-chip::after,
+    .venato-more__btn::after {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.35), transparent 55%);
+        opacity: 0;
+        transition: opacity 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+        pointer-events: none;
+    }
+
+    .venato-chip:hover::after,
+    .venato-more__btn:hover::after {
+        opacity: 1;
+    }
+
+    .venato-chip.is-active::after {
+        opacity: 1;
+        animation: venato-sheen 2400ms linear infinite;
+    }
+
+    .venato-featured__img,
+    .venato-item__img {
+        transform: scale(1.02);
+        transition: transform 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+        will-change: transform;
+    }
+
+    .venato-featured:hover .venato-featured__img,
+    .venato-item:hover .venato-item__img {
+        transform: scale(1.08);
+    }
+
+    .venato-featured,
+    .venato-item,
+    .venato-chip,
+    .venato-cat,
+    .venato-more__btn,
+    .venato-itineraire,
+    .venato-iconbtn,
+    .venato-hamburger {
+        transition:
+            transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+            box-shadow 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+            background-color 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+            border-color 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+            color 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+        will-change: transform;
+    }
+
+    .venato-featured:hover,
+    .venato-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.08);
+    }
+
+    .venato-chip:hover,
+    .venato-cat:hover,
+    .venato-more__btn:hover,
+    .venato-itineraire:hover,
+    .venato-iconbtn:hover,
+    .venato-hamburger:hover {
+        transform: translateY(-1px);
+    }
+
+    .venato-chip:active,
+    .venato-cat:active,
+    .venato-more__btn:active,
+    .venato-itineraire:active,
+    .venato-iconbtn:active,
+    .venato-hamburger:active {
+        transform: translateY(0);
+    }
+}
+
+@keyframes venato-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes venato-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes venato-fade-down {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes venato-slide-in {
+    from {
+        transform: translateX(-14px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes venato-bg {
+    0% {
+        background-position: 0% 40%;
+    }
+    50% {
+        background-position: 100% 60%;
+    }
+    100% {
+        background-position: 0% 40%;
+    }
+}
+
+@keyframes venato-shimmer {
+    0% {
+        transform: translateX(-65%);
+        opacity: 0.35;
+    }
+    50% {
+        opacity: 0.65;
+    }
+    100% {
+        transform: translateX(65%);
+        opacity: 0.35;
+    }
+}
+
+@keyframes venato-pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(139, 107, 0, 0.45);
+    }
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(139, 107, 0, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(139, 107, 0, 0);
+    }
+}
+
+@keyframes venato-float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-2px);
+    }
+}
+
+@keyframes venato-sheen {
+    0% {
+        background-position: 0% 0%;
+        transform: translateX(-10%);
+    }
+    100% {
+        background-position: 100% 0%;
+        transform: translateX(10%);
+    }
+}
